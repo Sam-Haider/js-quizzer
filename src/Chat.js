@@ -88,7 +88,8 @@ const Chat = () => {
   const [answer, setAnswer] = useState("");
   const [feedback, setFeedback] = useState("");
   const [score, setScore] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingFeedback, setIsLoadingFeedback] = useState(false);
+  const [isLoadingQuestion, setIsLoadingQuestion] = useState(false);
   const [getQuestionText, setGetQuestionText] = useState("Quiz Me!");
 
   const handleTopicChange = (event) => {
@@ -105,6 +106,7 @@ const Chat = () => {
 
   const getQuizQuestion = async () => {
     setGetQuestionText("Get a new question");
+    setIsLoadingQuestion(true);
     setFeedback("");
     try {
       const payload = {
@@ -142,12 +144,18 @@ const Chat = () => {
 
   useEffect(() => {
     if (feedback) {
-      setIsLoading(false);
+      setIsLoadingFeedback(false);
     }
-  }, [feedback, setIsLoading]);
+  }, [feedback, setIsLoadingFeedback]);
+
+  useEffect(() => {
+    if (question) {
+      setIsLoadingQuestion(false);
+    }
+  }, [question, setIsLoadingQuestion]);
 
   const assessAnswer = async () => {
-    setIsLoading(true);
+    setIsLoadingFeedback(true);
     try {
       const payload = {
         model: "gpt-3.5-turbo",
@@ -207,6 +215,7 @@ const Chat = () => {
       </select>
 
       <button onClick={getQuizQuestion}>{getQuestionText}</button>
+      {isLoadingQuestion && <div>Getting a question ready...</div>}
 
       {question && (
         <QuestionContainer>
@@ -218,7 +227,7 @@ const Chat = () => {
           <button className="submit-answer-button" onClick={assessAnswer}>
             Submit Answer
           </button>
-          {isLoading && <div>Analyzing your response...</div>}
+          {isLoadingFeedback && <div>Analyzing your response...</div>}
         </QuestionContainer>
       )}
 
