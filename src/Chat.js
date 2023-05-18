@@ -67,7 +67,7 @@ const QuestionContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #0f3460;
+  background-color: #1e2648;
   padding: 20px;
   border-radius: 10px;
   width: 96%;
