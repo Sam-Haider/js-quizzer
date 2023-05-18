@@ -83,6 +83,7 @@ const Chat = () => {
   const [answer, setAnswer] = useState("");
   const [feedback, setFeedback] = useState("");
   const [score, setScore] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleTopicChange = (event) => {
     setTopic(event.target.value);
@@ -127,12 +128,19 @@ const Chat = () => {
     }
   };
 
-  // This will run when the component mounts
   useEffect(() => {
-    getQuizQuestion();
+    // TODO: NEED TO UNDO THIS
+    // getQuizQuestion();
   }, []);
 
+  useEffect(() => {
+    if (feedback) {
+      setIsLoading(false);
+    }
+  }, [feedback, setIsLoading]);
+
   const assessAnswer = async () => {
+    setIsLoading(true);
     try {
       const payload = {
         model: "gpt-3.5-turbo",
@@ -199,6 +207,7 @@ const Chat = () => {
           <button className="submit-answer-button" onClick={assessAnswer}>
             Submit Answer
           </button>
+          {isLoading && <div>Analyzing your response...</div>}
         </QuestionContainer>
       )}
 
