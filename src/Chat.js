@@ -26,6 +26,7 @@ const MainContainer = styled.div`
 
   select,
   input[type="text"] {
+    font-size: 20px;
     padding: 10px;
     border: none;
     border-radius: 5px;
@@ -47,9 +48,11 @@ const MainContainer = styled.div`
     color: #fff;
     cursor: pointer;
     margin-bottom: 20px;
+    font-size: 16px;
   }
 
   .submit-answer-button {
+    font-size: 16px;
     background-color: #ff68a3;
   }
 
