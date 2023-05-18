@@ -12,6 +12,7 @@ const MainContainer = styled.div`
   min-height: 100vh;
   background-color: #1a1a2e;
   color: #fff;
+  font-size: 18px;
 
   h1 {
     color: #78dad3;
@@ -32,6 +33,10 @@ const MainContainer = styled.div`
     color: #fff;
     margin-bottom: 20px;
     width: 100%;
+  }
+
+  .select-dropdown {
+    font-size: 20px;
   }
 
   button {
@@ -84,6 +89,7 @@ const Chat = () => {
   const [feedback, setFeedback] = useState("");
   const [score, setScore] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [getQuestionText, setGetQuestionText] = useState("Quiz Me!");
 
   const handleTopicChange = (event) => {
     setTopic(event.target.value);
@@ -98,6 +104,7 @@ const Chat = () => {
   };
 
   const getQuizQuestion = async () => {
+    setGetQuestionText("Get a new question");
     setFeedback("");
     try {
       const payload = {
@@ -164,8 +171,6 @@ const Chat = () => {
       );
 
       const assistantMessage = response.data.choices[0].message.content.trim();
-      // This assumes the AI returns the score as the first part of its response, followed by the feedback
-      console.log({ assistantMessage });
       const [score, ...feedback] = assistantMessage.split("</>");
       setScore(Number(score.trim()));
       setFeedback(feedback.join("."));
@@ -175,27 +180,33 @@ const Chat = () => {
     }
   };
 
-  console.log({ score });
-
   return (
     <MainContainer>
       <h1>React and JS Quizzer</h1>
       <p className="subheading">Powered by OpenAI's GPT-3.5 Turbo</p>
 
       <label>Topic </label>
-      <select value={topic} onChange={handleTopicChange}>
+      <select
+        className="select-dropdown"
+        value={topic}
+        onChange={handleTopicChange}
+      >
         <option value="javascript">JavaScript</option>
         <option value="react">React</option>
       </select>
 
       <label>Level </label>
-      <select value={level} onChange={handleLevelChange}>
+      <select
+        className="select-dropdown"
+        value={level}
+        onChange={handleLevelChange}
+      >
         <option value="beginner">Beginner</option>
         <option value="intermediate">Intermediate</option>
         <option value="advanced">Advanced</option>
       </select>
 
-      <button onClick={getQuizQuestion}>Get Another Question</button>
+      <button onClick={getQuizQuestion}>{getQuestionText}</button>
 
       {question && (
         <QuestionContainer>
