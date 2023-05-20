@@ -5,23 +5,26 @@ import styled from "styled-components";
 const MainContainer = styled.div`
   margin: 0 auto;
   max-width: 800px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   padding: 20px;
   min-height: 100vh;
   background-color: #1a1a2e;
   color: #fff;
   font-size: 18px;
 
-  h1 {
+  .title {
     color: #78dad3;
     font-size: 2rem;
+    text-align: center;
   }
 
-  label {
+  .subtitle {
+    margin: 0 0 40px 0;
+    padding: 0;
+    text-align: center;
+  }
+
+  .input-label {
     color: #adfffe;
-    margin-right: 10px;
   }
 
   select,
@@ -32,6 +35,7 @@ const MainContainer = styled.div`
     border-radius: 5px;
     background-color: #16213e;
     color: #fff;
+    margin-top: 10px;
     margin-bottom: 20px;
     width: 100%;
   }
@@ -41,24 +45,20 @@ const MainContainer = styled.div`
   }
 
   button {
+    display: block;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     background-color: #0f3460;
     color: #fff;
     cursor: pointer;
-    margin-bottom: 20px;
+    margin: 0 auto 20px auto;
     font-size: 16px;
   }
 
   .submit-answer-button {
     font-size: 16px;
     background-color: #ff68a3;
-  }
-
-  .subheading {
-    margin: 0 0 40px 0;
-    padding: 0;
   }
 `;
 
@@ -70,9 +70,9 @@ const QuestionContainer = styled.div`
   background-color: #1e2648;
   padding: 20px;
   border-radius: 10px;
-  width: 96%;
   max-width: 750px;
-  margin-bottom: 20px;
+  display: block;
+  margin: 0 auto 20px auto;
 
   h2 {
     color: #ff68a3;
@@ -84,7 +84,7 @@ const FeedbackContainer = styled(QuestionContainer)`
   background-color: #16213e;
 `;
 
-const Chat = () => {
+const Quizzer = () => {
   const [topic, setTopic] = useState("javascript");
   const [level, setLevel] = useState("beginner");
   const [question, setQuestion] = useState("");
@@ -193,10 +193,10 @@ const Chat = () => {
 
   return (
     <MainContainer>
-      <h1>React and JS Quizzer</h1>
-      <p className="subheading">Powered by OpenAI's GPT-3.5 Turbo</p>
+      <h1 className="title">React and JS Quizzer</h1>
+      <p className="subtitle">Powered by OpenAI's GPT-3.5 Turbo</p>
 
-      <label>Topic </label>
+      <label className="input-label">Topic </label>
       <select
         className="select-dropdown"
         value={topic}
@@ -206,7 +206,7 @@ const Chat = () => {
         <option value="react">React</option>
       </select>
 
-      <label>Level </label>
+      <label className="input-label">Level </label>
       <select
         className="select-dropdown"
         value={level}
@@ -245,4 +245,4 @@ const Chat = () => {
   );
 };
 
-export default Chat;
+export default Quizzer;
