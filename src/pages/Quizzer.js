@@ -27,8 +27,7 @@ const MainContainer = styled.div`
     color: #adfffe;
   }
 
-  select,
-  input[type="text"] {
+  select {
     font-size: 20px;
     padding: 10px;
     border: none;
@@ -38,6 +37,19 @@ const MainContainer = styled.div`
     margin-top: 10px;
     margin-bottom: 20px;
     width: 100%;
+  }
+
+  .answer {
+    font-size: 20px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #16213e;
+    color: #fff;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    display: block;
+    width: calc(100% - 20px);
   }
 
   .select-dropdown {
@@ -63,10 +75,6 @@ const MainContainer = styled.div`
 `;
 
 const QuestionContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   background-color: #1e2648;
   padding: 20px;
   border-radius: 10px;
@@ -224,9 +232,13 @@ const Quizzer = () => {
         <QuestionContainer>
           <h2>Question:</h2>
           <p>{question}</p>
-
           <h2>Your Answer:</h2>
-          <input type="text" value={answer} onChange={handleAnswerChange} />
+          <input
+            className="answer"
+            type="text"
+            value={answer}
+            onChange={handleAnswerChange}
+          />
           <button className="submit-answer-button" onClick={assessAnswer}>
             Submit Answer
           </button>
